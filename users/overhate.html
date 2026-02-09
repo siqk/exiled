@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>overhate</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="https://i.pinimg.com/736x/07/32/a0/0732a0c11337382a2cbf6ebc8fd4b5f5.jpg">
+
+<meta property="og:title" content="overhate">
+<meta property="og:description" content="overhate">
+<meta property="og:image" content="https://i.pinimg.com/736x/07/32/a0/0732a0c11337382a2cbf6ebc8fd4b5f5.jpg">
+<meta property="og:type" content="website">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="overhate">
+<meta name="twitter:image" content="https://i.pinimg.com/736x/07/32/a0/0732a0c11337382a2cbf6ebc8fd4b5f5.jpg">
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #000;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: url('https://i.pinimg.com/736x/f1/03/6f/f1036f5522d1ee142381383f2460259e.jpg') center/cover no-repeat;
+    opacity: 0.06;
+    filter: grayscale(100%) brightness(0.1);
+    z-index: -1;
+}
+
+#overlay {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    z-index: 999;
+    transition: opacity 1s ease;
+}
+#overlay.fade {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.container {
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+.container.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+}
+
+.pfp {
+    width: 170px;
+    height: 170px;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid #fff;
+}
+.pfp img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.logo {
+    font-size: 2.8rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+
+    -webkit-mask-image: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255,255,255,0.15) 20%,
+        white 45%,
+        white 55%,
+        rgba(255,255,255,0.15) 80%,
+        transparent 100%
+    );
+    -webkit-mask-size: 300% 100%;
+    -webkit-mask-position: 300% 0;
+    animation: wipe 5s ease-in-out infinite;
+}
+
+@keyframes wipe {
+    0%   { -webkit-mask-position: 300% 0; }
+    50%  { -webkit-mask-position: 150% 0; }
+    100% { -webkit-mask-position: -150% 0; }
+}
+
+.links {
+    display: flex;
+    gap: 18px;
+    font-size: 0.85rem;
+}
+
+.handle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    user-select: text;
+    cursor: text;
+    opacity: 0.85;
+}
+
+.handle svg {
+    width: 15px;
+    height: 15px;
+    fill: currentColor;
+}
+
+.telegram { color: #0088cc; }
+.discord { color: #7289da; }
+
+.readme {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.readme h1,
+.readme h2 {
+    font-weight: 600;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 6px;
+}
+
+.readme ul { padding-left: 18px; }
+.readme li { font-size: 0.9rem; }
+
+.readme a {
+    color: #fff;
+    opacity: 0.75;
+    text-decoration: none;
+}
+.readme a:hover { opacity: 1; }
+
+@media (max-width:600px) {
+    .logo { font-size: 2.2rem; }
+    .pfp { width: 140px; height: 140px; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="overlay">click to see true harm.</div>
+
+<audio id="music" loop>
+    <source src="https://github.com/siqk/exiled/raw/refs/heads/main/%D1%81vnt.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container" id="content">
+
+    <div class="profile">
+        <div class="pfp">
+            <img src="https://i.pinimg.com/736x/7a/2d/d3/7a2dd33d373c2963be3f198a789c6b39.jpg">
+        </div>
+
+        <div class="logo">overhate</div>
+
+        <div class="links">
+            <div class="handle telegram">
+                <svg viewBox="0 0 24 24">
+                    <path d="M9.04 15.44l-.38 5.38c.54 0 .78-.23 1.07-.5l2.57-2.45 5.33 3.9c.98.54 1.68.26 1.93-.9l3.5-16.47c.32-1.5-.54-2.1-1.5-1.74L1.42 9.6c-1.46.56-1.44 1.36-.25 1.73l5.65 1.76L19.7 5.9c.61-.4 1.17-.18.71.22"/>
+                </svg>
+                @feddest, @incestkinks 
+            </div>
+
+            <div class="handle discord">
+                <svg viewBox="0 0 24 24">
+                    <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/>
+                </svg>
+                @0lza
+            </div>
+        </div>
+    </div>
+
+    <div class="readme">
+        <h1># overhate</h1>
+        <p>alias : overhate</p>
+
+        <h2># websites</h2>
+        <ul>
+            <li>https://cursed.lat/users/overhate</li>
+        </ul>
+
+        <h2># socials</h2>
+        <ul>
+            <li><a href="https://www.tiktok.com/@feddest" target="_blank">TikTok</a></li>
+            <li><a href="https://t.me/feddest" target="_blank">tele - @feddest</a></li>
+            <li><a href="https://t.me/incestkinks" target="_blank">tele - @incestkinks</a></li>
+        </ul>
+    </div>
+
+</div>
+
+<script>
+const overlay = document.getElementById("overlay");
+const music = document.getElementById("music");
+const content = document.getElementById("content");
+
+overlay.addEventListener("click", () => {
+    music.volume = 0.5;
+    music.play();
+    overlay.classList.add("fade");
+    content.classList.add("show");
+});
+</script>
+
+</body>
+</html>
