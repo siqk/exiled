@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>#mev/cursed</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; outline:none; }
+body {
+    height:100vh;
+    background: url("https://raw.githubusercontent.com/ccursedd/bg/refs/heads/main/0215.gif") no-repeat center center fixed;
+    background-size: cover;
+    font-family: Arial, sans-serif;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+}
+
+/* TABS */
+.tabs {
+    position: fixed;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display:flex;
+    gap:50px;
+    z-index:5;
+}
+.tab {
+    position: relative;
+    cursor:pointer;
+    font-size:0.9rem;
+    letter-spacing:2px;
+    opacity:0.7;
+    transition: opacity 0.3s ease;
+}
+.tab:hover { opacity:1; }
+.tab.active { opacity:1; }
+.tab::after {
+    content:"";
+    position:absolute;
+    bottom:-8px;
+    left:50%;
+    width:0%;
+    height:2px;
+    background:white;
+    transform:translateX(-50%);
+    transition: width 0.4s ease;
+}
+.tab.active::after { width:100%; }
+
+/* FRAME */
+.frame {
+    position:absolute;
+    width:400px;
+    padding:40px 30px;
+    background: rgba(0,0,0,0.25);
+    backdrop-filter: blur(8px);
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 0 40px rgba(0,0,0,0.6);
+    opacity:0;
+    transform:translateY(20px);
+    transition:all 0.5s ease;
+    pointer-events:none;
+    z-index:10;
+}
+.frame.show { opacity:1; transform:translateY(0); pointer-events:auto; }
+
+.pfp { width:120px; height:120px; border-radius:50%; object-fit:cover; margin-bottom:15px; }
+.name-wrapper { display:flex; justify-content:center; align-items:center; gap:10px; margin-bottom:10px; }
+.username {
+    font-size:1.8rem;
+    font-weight:bold;
+    letter-spacing:2px;
+    background: linear-gradient(90deg, #000, #fff, #000);
+    background-size:200% 100%;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation: gradientMove 3s linear infinite;
+}
+@keyframes gradientMove { 0%{background-position:0 0;} 100%{background-position:200% 0;} }
+.rich-tag { color:white; font-weight:bold; font-size:1.3rem; }
+.list { font-size:0.95rem; line-height:1.6; opacity:0.9; }
+
+.black-screen {
+    position: fixed; inset:0;
+    background:black;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    transition: opacity 0.5s ease;
+    z-index:15;
+}
+.black-screen.fade-out { opacity:0; pointer-events:none; }
+.intro-text { font-size:2rem; letter-spacing:4px; }
+
+#snow-layer {
+    position: fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:1;
+    overflow:hidden;
+}
+.snowflake {
+    position: absolute;
+    color:white;
+    user-select:none;
+    pointer-events:none;
+    opacity:0.7;
+}
+</style>
+</head>
+<body>
+
+<div class="black-screen" onclick="startMotion()" id="overlay">
+    <div class="intro-text">click to see motion</div>
+</div>
+
+<div class="tabs">
+    <div class="tab active" onclick="showTab('profile', this)">Profile</div>
+    <div class="tab" onclick="showTab('users', this)">My @'s</div>
+</div>
+
+<div id="snow-layer"></div>
+
+<!-- PROFILE TAB -->
+<div class="frame show" id="profile">
+    <img class="pfp" src="https://i.pinimg.com/736x/d8/f6/23/d8f623b6888afd19d7cf0bc875ed1d94.jpg">
+    <div class="name-wrapper">
+        <span class="username" id="username"></span>
+        <span class="rich-tag">[RICH]</span>
+    </div>
+
+    <!-- Clean Discord Server Info -->
+    <div id="discord-info" style="margin-top:15px; text-align:center; color:white;">
+        <div id="discord-loading" style="opacity:0.7;">Loading Discord...</div>
+    </div>
+</div>
+
+<!-- USERS TAB -->
+<div class="frame" id="users">
+    <div class="name" style="text-align:center; margin-bottom:15px;">My @'s</div>
+    <div class="list" style="display:flex; flex-direction:column; align-items:center; gap:20px;">
+        <!-- Discord -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+            <div style="display:flex; align-items:center; gap:8px;">
+                <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg" 
+                     alt="Discord" style="width:24px; height:24px;">
+                <span>Discord:</span>
+            </div>
+            <div style="line-height:1.5; text-align:center;">
+                @tkuy,<br>@ouwq,<br>@wpqa
+            </div>
+        </div>
+
+        <!-- Telegram -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+            <div style="display:flex; align-items:center; gap:8px;">
+                <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg" 
+                     alt="Telegram" style="width:24px; height:24px;">
+                <span>Telegram:</span>
+            </div>
+            <div style="line-height:1.5; text-align:center;">
+                @gutcanvas
+            </div>
+        </div>
+            
+        <!-- Telegram -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+            <div style="display:flex; align-items:center; gap:8px;">
+                <img src="https://raw.githubusercontent.com/ccursedd/youknow/refs/heads/main/globee.png" 
+                     alt="Website" style="width:24px; height:24px;">
+                <span>My own site:</span>
+            </div>
+            <div style="line-height:1.5; text-align:center;">
+                https://cursed.lat/c
+            </div>
+        </div>
+    </div>
+</div>
+
+<audio id="audioPlayer">
+    <source src="https://r2.guns.lol/149bc3a9-7b6a-4ec8-ba23-eefb5bbc2c60.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// TYPEWRITER EFFECT
+let started=false;
+const usernameText="#mev/cursed";
+const usernameEl = document.getElementById('username');
+let idx=0, forward=true;
+
+function typeLoop(){
+    if(forward){
+        usernameEl.textContent = usernameText.slice(0, idx+1);
+        idx++;
+        if(idx>=usernameText.length){
+            setTimeout(()=>{ forward=false; typeLoop(); }, 2000);
+            return;
+        }
+    } else {
+        usernameEl.textContent = usernameText.slice(0, idx-1);
+        idx--;
+        if(idx<=0){
+            setTimeout(()=>{ forward=true; typeLoop(); }, 2000);
+            return;
+        }
+    }
+    setTimeout(typeLoop,120);
+}
+
+// TABS
+function showTab(tabId, element){
+    document.querySelectorAll('.frame').forEach(f=>f.classList.remove('show'));
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    document.getElementById(tabId).classList.add('show');
+    element.classList.add('active');
+}
+
+// SNOW EFFECT
+const snowLayer = document.getElementById('snow-layer');
+const snowflakes=[];
+
+function startMotion(){
+    if(started) return;
+    started=true;
+    document.getElementById('audioPlayer').play();
+    document.getElementById('overlay').classList.add('fade-out');
+    setTimeout(()=>{ 
+        document.getElementById('profile').classList.add('show');
+        typeLoop();
+        initSnow();
+    },200);
+}
+
+function initSnow(){
+    for(let i=0;i<30;i++) createFlake(true);
+    setInterval(()=>createFlake(false), 1500);
+    requestAnimationFrame(updateSnow);
+}
+
+function createFlake(spread){
+    const f=document.createElement('div');
+    f.classList.add('snowflake');
+    f.textContent='❄';
+    f.size=Math.random()*12+8;
+    f.speedY=Math.random()*0.15+0.05;
+    f.speedX=Math.random()*0.1-0.05;
+    if(spread){
+        f.x=Math.random()*window.innerWidth;
+        f.y=Math.random()*window.innerHeight;
+    } else {
+        f.x=Math.random()*window.innerWidth;
+        f.y=-10;
+    }
+    f.style.fontSize=f.size+'px';
+    snowLayer.appendChild(f);
+    snowflakes.push(f);
+}
+
+function updateSnow(){
+    snowflakes.forEach(f=>{
+        f.y+=f.speedY;
+        f.x+=f.speedX;
+        if(f.x>window.innerWidth) f.x=0;
+        if(f.x<0) f.x=window.innerWidth;
+        if(f.y>window.innerHeight) f.y=-10;
+        f.style.transform=`translate(${f.x}px, ${f.y}px)`;
+    });
+    requestAnimationFrame(updateSnow);
+}
+
+
+// DYNAMIC HORIZONTAL DISCORD SERVER INFO
+(async () => {
+    const INVITE_CODE = "c7n8BEfZ";
+    const DIV = document.getElementById("discord-info");
+
+    try {
+        const inviteRes = await fetch(`https://discord.com/api/v10/invites/${INVITE_CODE}?with_counts=true`);
+        if (!inviteRes.ok) throw new Error("Invalid invite or rate limited");
+        const inviteData = await inviteRes.json();
+        const guild = inviteData.guild;
+
+        DIV.innerHTML = `
+            <div style="display:flex; align-items:center; justify-content:center; gap:15px;">
+                <img src="https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png?size=128" 
+                     style="width:60px; height:60px; border-radius:50%;">
+                <a href="https://discord.gg/${INVITE_CODE}" 
+                   target="_blank" 
+                   style="
+                       background:#fff;
+                       color:black;
+                       text-decoration:none;
+                       padding:10px 20px;
+                       border-radius:25px;
+                       font-weight:bold;
+                       display:inline-block;
+                       transition:0.2s;
+                   "
+                   onmouseover="this.style.background='#fff'"
+                   onmouseout="this.style.background='#fff'">
+                   Join /cursedd
+                </a>
+            </div>
+        `;
+    } catch (err) {
+        console.error("Discord fetch error:", err);
+        DIV.innerHTML = `
+            <a href="https://discord.gg/${INVITE_CODE}" 
+               target="_blank" 
+               style="
+                   background:#fff;
+                   color:black;
+                   text-decoration:none;
+                   padding:10px 20px;
+                   border-radius:25px;
+                   font-weight:bold;
+                   display:inline-block;
+               ">
+               Join /cursedd
+            </a>
+        `;
+    }
+})();
+</script>
+
+</body>
+</html>
