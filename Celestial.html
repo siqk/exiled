@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Celestial | Mic Up Script!</title>
+    <title>Custom System Broken | Mic Up Script!</title>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <style>
@@ -176,13 +176,13 @@
 
 <div class="dashboard" id="dashboard">
     <div class="bento hero">
-        <span class="brand">Celestial v2.4.0</span>
+        <span class="brand">Custom System Broken v2.4.0</span>
         <h1>Unlock the Stars<span style="color:var(--accent)">.</span></h1>
         <p style="color: var(--text-dim); max-width: 400px; margin-bottom: 5px;">
             The most advanced micup script 
         </p>
         <p style="color: var(--text-dim); max-width: 400px;">
-            Founders : mev (dc : @tkuy), zalk (dc : @za.1k)
+            Founders : mev (dc : @tkuy)
         </p>
         
         <div class="controls">
@@ -245,7 +245,7 @@
         });
     };
 
-    const SCRIPT_URL = "https://raw.githubusercontent.com/ccursedd/exiled/refs/heads/main/main.lua";
+    const SCRIPT_URL = "https://raw.githubusercontent.com/ccursedd/exiled/refs/heads/main/rblx/sys.lua";
 
     async function downloadFile() {
         const btn = document.getElementById('dlBtn');
@@ -260,7 +260,7 @@
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = "Celestial_MicUp.lua";
+            a.download = "Custom_System_Broken.lua";
             document.body.appendChild(a);
             a.click();
             window.URL.revokeObjectURL(url);
@@ -281,7 +281,7 @@
     }
 
     function copyLoadstring() {
-        const loadstring = `loadstring(game:HttpGet("https://exiled.lat/main.lua"))()`;
+        const loadstring = `loadstring(game:HttpGet("https://exiled.lat/rblx/sys.lua"))()`;
         navigator.clipboard.writeText(loadstring);
         
         const toast = document.getElementById('copyToast');
