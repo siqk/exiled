@@ -175,4 +175,4 @@ CreateToggle = function(self, tab, text, default, callback)
     updateVisuals(default or false)
     
     return frame
-end,
+end
