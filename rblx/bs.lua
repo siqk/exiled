@@ -47,8 +47,3 @@ for x = 0, GRID-1 do
         part.Parent = Workspace
     end
 end
-
-print("Created 40k baseplate using " .. GRID*GRID .. " parts")
-print("Base Y Position: " .. BASE_Y_POSITION .. " (2 studs lower than original)")
-print("Top surface at Y = " .. (BASE_Y_POSITION + THICKNESS))  -- -10 + 10 = 0
-print("Bottom surface at Y = " .. BASE_Y_POSITION)  -- -10
